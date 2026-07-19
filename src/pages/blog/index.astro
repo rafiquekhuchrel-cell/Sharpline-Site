@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title="Blog" description="Practical writing on proposals, financial planning, and running a small business — from the team behind Sharpline templates.">
+  <section class="section-dark blog-hero">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">THE SHARPLINE BLOG</p>
+      <h1>Practical writing for people who run their own thing.</h1>
+      <p class="blog-tagline">No fluff, no listicles — the actual mechanics of proposals, forecasts, and client systems.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="post-list">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} class="post-card">
+            <span class="post-date">{dateFmt(post.data.publishDate)}</span>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+            <span class="post-tags">
+              {post.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+            </span>
+            <span class="post-read">Read the article &rarr;</span>
+          </a>
+        ))}
+        {posts.length === 0 && <p class="empty-note">New posts coming soon.</p>}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-hero { position: relative; padding: 64px 0; }
+  .blog-hero .container { position: relative; z-index: 2; }
+  .blog-hero h1 { color: var(--white); font-size: 40px; margin-top: 12px; max-width: 680px; }
+  .blog-tagline { color: #B9C4C8; font-size: 18px; margin-top: 16px; max-width: 560px; }
+
+  .post-list {
+    display: grid;
+    gap: 20px;
+    max-width: 760px;
+  }
+  .post-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 30px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .post-card:hover { border-color: var(--emerald); transform: translateY(-2px); }
+  .post-date { font-family: var(--font-mono); font-size: 12.5px; color: var(--slate); letter-spacing: 0.5px; }
+  .post-card h2 { font-size: 23px; margin-top: 10px; }
+  .post-card p { color: var(--slate); font-size: 16px; margin-top: 10px; line-height: 1.6; }
+  .post-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--paper2);
+    color: var(--emerald-dark);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .post-read { display: inline-block; margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--emerald-dark); }
+  .empty-note { color: var(--slate); }
+</style>

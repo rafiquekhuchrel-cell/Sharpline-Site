@@ -1,0 +1,129 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const dateFmt = post.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const relatedProducts = post.data.relatedProducts.length
+  ? (await getCollection('products')).filter((p) => post.data.relatedProducts.includes(p.id))
+  : [];
+---
+<BaseLayout title={post.data.title} description={post.data.description} ogType="article">
+  <article>
+    <section class="post-hero section-dark">
+      <div class="grid-bg"></div>
+      <div class="container post-hero-inner">
+        <a href="/blog" class="pdp-breadcrumb">&larr; Blog</a>
+        <p class="eyebrow on-dark">{dateFmt}</p>
+        <h1>{post.data.title}</h1>
+        <p class="post-sub">{post.data.description}</p>
+        <div class="post-tags">
+          {post.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container post-body">
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+    </section>
+
+    {relatedProducts.length > 0 && (
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">MENTIONED IN THIS ARTICLE</p>
+            <h2>Related templates</h2>
+          </div>
+          <div class="related-grid">
+            {relatedProducts.map((p) => (
+              <a href={`/product/${p.id}`} class="related-card">
+                <span class="related-tag">{p.data.formatTag}</span>
+                <h3>{p.data.name}</h3>
+                <p>{p.data.tagline}</p>
+                <span class="related-price">{p.data.price === null ? 'Free' : `$${p.data.price}`}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .post-hero { position: relative; padding: 56px 0 48px; }
+  .post-hero-inner { position: relative; z-index: 2; max-width: 720px; }
+  .pdp-breadcrumb { display: inline-block; font-size: 14px; color: #8CA0A8; margin-bottom: 18px; }
+  .pdp-breadcrumb:hover { color: var(--emerald-light); }
+  .post-hero h1 { color: var(--white); font-size: 38px; margin-top: 12px; line-height: 1.2; }
+  .post-sub { color: #B9C4C8; font-size: 18px; margin-top: 16px; line-height: 1.55; }
+  .post-tags { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: rgba(255,255,255,0.08);
+    color: var(--emerald-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .post-body { max-width: 720px; }
+  .prose { font-size: 17px; line-height: 1.75; color: var(--text); }
+  .prose :global(h2) { font-size: 25px; margin-top: 42px; margin-bottom: 16px; }
+  .prose :global(h3) { font-size: 20px; margin-top: 32px; margin-bottom: 12px; }
+  .prose :global(p) { margin-bottom: 20px; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 20px 24px; }
+  .prose :global(li) { margin-bottom: 10px; }
+  .prose :global(strong) { color: var(--ink); }
+  .prose :global(a) { color: var(--emerald-dark); font-weight: 600; text-decoration: underline; }
+  .prose :global(hr) { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--emerald);
+    padding-left: 18px;
+    color: var(--slate);
+    font-style: italic;
+    margin: 24px 0;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 760px;
+  }
+  .related-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .related-card:hover { border-color: var(--emerald); transform: translateY(-2px); }
+  .related-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: bold;
+    color: var(--emerald-dark);
+  }
+  .related-card h3 { font-size: 18px; margin-top: 10px; }
+  .related-card p { color: var(--slate); font-size: 14px; margin-top: 8px; line-height: 1.5; }
+  .related-price { display: inline-block; margin-top: 14px; font-family: var(--font-mono); font-weight: bold; color: var(--ink); }
+
+  @media (max-width: 700px) {
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>

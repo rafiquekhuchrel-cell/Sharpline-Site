@@ -45,4 +45,18 @@ const bundles = defineCollection({
   }),
 });
 
-export const collections = { products, categories, bundles };
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(), // meta description + card summary
+    publishDate: z.coerce.date(),
+    author: z.string().default('Sharpline'),
+    tags: z.array(z.string()).default([]),
+    relatedCategory: z.string().optional(), // slug into categories collection
+    relatedProducts: z.array(z.string()).default([]), // slugs into products collection
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { products, categories, bundles, posts };
