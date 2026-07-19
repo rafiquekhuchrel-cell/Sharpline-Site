@@ -1,0 +1,153 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+
+const allProducts = await getCollection('products');
+// pull the same 3 products featured in the original hero mockup, fall back to first 3 featured
+const heroSlugs = ['seo-proposal-template', 'real-forecast-model', 'company-profile-template'];
+const heroCards = heroSlugs
+  .map((slug) => allProducts.find((p) => p.id === slug))
+  .filter(Boolean);
+---
+<section class="hero">
+  <div class="grid-bg"></div>
+  <svg class="trace-svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M 850 560 C 950 520, 1000 580, 1090 500 C 1180 430, 1230 470, 1300 400"
+          stroke="#1F9D6B" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="6,10" fill="none"/>
+    <circle cx="850" cy="560" r="6" fill="#F5B942" opacity="0.55"/>
+    <circle cx="1090" cy="500" r="6" fill="#1F9D6B" opacity="0.5"/>
+    <circle cx="1300" cy="400" r="6" fill="#1F9D6B" opacity="0.55"/>
+  </svg>
+
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow on-dark">FOR FOUNDERS, FREELANCERS &amp; OPERATORS</p>
+      <h1>Premium digital templates for founders who move with intent.</h1>
+      <p class="hero-sub">Build faster, look sharper, and sell smarter with high-value templates for company profiles, proposals, business plans, financial forecasts, and operations systems.</p>
+      <div class="hero-btns">
+        <a href="/shop" class="btn btn-primary">Explore the Collection</a>
+        <a href="/shop#where-to-start" class="btn btn-secondary-dark">Where to Start</a>
+      </div>
+    </div>
+
+    <div class="hero-cards" aria-hidden="true">
+      {heroCards.map((product, i) => product && (
+        <a href={`/product/${product.id}`} class={`doc-card card-${i} ${product.data.cardStyle}`}>
+          <span class="dc-eyebrow">{product.data.formatTag}</span>
+          <span class="dc-name">{product.data.name}</span>
+          <span class="dc-line" style="width:75%"></span>
+          <span class="dc-line" style="width:55%"></span>
+          <span class={`dc-tag tag-${i % 3}`}>{product.data.heroTag}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+  }
+  .trace-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+  .hero-copy { max-width: 560px; }
+  .hero-copy h1 {
+    font-size: 48px;
+    color: var(--white);
+    margin-top: 16px;
+  }
+  .hero-sub {
+    color: #B9C4C8;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 22px;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-cards {
+    position: relative;
+    height: 480px;
+  }
+  .doc-card {
+    position: absolute;
+    width: 280px;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 24px 55px rgba(0,0,0,0.45);
+    transition: transform 0.25s ease;
+  }
+  .doc-card:hover { transform: translateY(-6px); }
+  .doc-card.paper { background: var(--paper); }
+  .doc-card.dark { background: var(--ink2); }
+  .card-0 { left: 0; top: 90px; transform: rotate(-4deg); z-index: 2; }
+  .card-1 { left: 210px; top: 0; transform: rotate(7deg); z-index: 1; }
+  .card-2 { left: 260px; top: 190px; transform: rotate(3deg); z-index: 3; }
+
+  .dc-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: var(--emerald-dark);
+  }
+  .doc-card.dark .dc-eyebrow { color: var(--emerald-light); }
+  .dc-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 10px;
+    color: var(--text);
+  }
+  .doc-card.dark .dc-name { color: var(--white); }
+  .dc-line {
+    display: block;
+    height: 6px;
+    background: #E7E2D3;
+    border-radius: 3px;
+    margin-top: 12px;
+  }
+  .doc-card.dark .dc-line { background: rgba(255,255,255,0.14); }
+  .dc-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 20px;
+    margin-top: 16px;
+  }
+  .tag-0 { background: var(--amber); color: #3A2A05; }
+  .tag-1 { background: var(--emerald); color: #052A1B; }
+  .tag-2 { background: var(--emerald); color: var(--white); }
+
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; padding-top: 48px; }
+    .hero-cards { display: none; }
+    .hero-copy h1 { font-size: 36px; }
+  }
+</style>

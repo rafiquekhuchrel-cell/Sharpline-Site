@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About" description="Made for people who take their business seriously.">
+  <section class="section-dark about-hero">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">ABOUT</p>
+      <h1>Made for people who take their business seriously.</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-body">
+      <p>I create digital products for founders, freelancers, and service businesses that want tools with structure, clarity, and commercial value. Every product is designed to help you operate with more confidence and less friction.</p>
+      <p>Sharpline started from a simple frustration: most business templates are either too generic to actually use, or too expensive to justify for a single document. Everything here is built the way I'd want to use it myself — real structure, real formulas where they matter, and nothing decorative standing in for substance.</p>
+      <a href="/shop" class="btn btn-primary">Shop All Templates</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero { position: relative; padding: 64px 0; }
+  .about-hero .container { position: relative; z-index: 2; }
+  .about-hero h1 { color: var(--white); font-size: 40px; margin-top: 12px; max-width: 640px; }
+  .about-body { max-width: 640px; }
+  .about-body p { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 24px; }
+</style>

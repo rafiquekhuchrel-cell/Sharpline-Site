@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const bundles = await getCollection('bundles');
+  return bundles.map((bundle) => ({
+    params: { id: bundle.id },
+    props: { bundle },
+  }));
+}
+
+const { bundle } = Astro.props;
+const allProducts = await getCollection('products');
+const includedProducts = bundle.data.productSlugs
+  .map((slug: string) => allProducts.find((p) => p.id === slug))
+  .filter(Boolean);
+const standaloneTotal = includedProducts.reduce((sum: number, p: any) => sum + (p.data.price ?? 0), 0);
+const savings = standaloneTotal - bundle.data.price;
+---
+<BaseLayout title={bundle.data.name} description={bundle.data.tagline}>
+  <section class="bundle-hero section-dark">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">FEATURED BUNDLE</p>
+      <h1>{bundle.data.name}</h1>
+      <p class="bundle-tagline">{bundle.data.description}</p>
+      <div class="bundle-buy-row">
+        <span class="pdp-price">${bundle.data.price}</span>
+        <a href={bundle.data.checkoutUrl} class="btn btn-primary" target="_blank" rel="noopener">Get the Bundle &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">WHAT'S INSIDE</p>
+        <h2>{includedProducts.length} documents, one system</h2>
+      </div>
+      <div class="value-table">
+        {includedProducts.map((p: any) => (
+          <div class="value-row">
+            <span class="value-name">{p.data.name}</span>
+            <span class="value-price">{p.data.price === null ? 'Free' : `$${p.data.price}`}</span>
+          </div>
+        ))}
+        <div class="value-row value-total">
+          <span class="value-name">Bundle Price</span>
+          <span class="value-price">${bundle.data.price}</span>
+        </div>
+      </div>
+      {savings > 0 && <p class="savings-note">That's ${savings} less than buying each item separately.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .bundle-hero { position: relative; padding: 64px 0; }
+  .bundle-hero .container { position: relative; z-index: 2; }
+  .bundle-hero h1 { color: var(--white); font-size: 42px; margin-top: 12px; }
+  .bundle-tagline { color: #B9C4C8; font-size: 18px; margin-top: 16px; max-width: 600px; line-height: 1.6; }
+  .bundle-buy-row { display: flex; align-items: center; gap: 20px; margin-top: 34px; }
+  .pdp-price { font-family: var(--font-mono); font-size: 32px; font-weight: bold; color: var(--emerald-light); }
+
+  .value-table {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    max-width: 640px;
+  }
+  .value-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 26px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+  }
+  .value-price { font-family: var(--font-mono); color: var(--slate); }
+  .value-total {
+    background: var(--ink);
+    border-bottom: none;
+  }
+  .value-total .value-name { color: var(--white); font-weight: 700; font-family: var(--font-display); }
+  .value-total .value-price { color: var(--emerald-light); font-weight: bold; font-size: 20px; }
+  .savings-note { margin-top: 18px; font-size: 15px; color: var(--emerald-dark); font-weight: 600; }
+</style>

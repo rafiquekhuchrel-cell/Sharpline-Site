@@ -1,0 +1,25 @@
+{
+  "name": "Client Onboarding Workflow",
+  "tagline": "Six stages from \"contract signed\" to delivered — so nothing falls through the cracks.",
+  "price": 9,
+  "format": "Word (.docx) — 4 pages",
+  "formatTag": "4 PAGES",
+  "category": "operations-client-systems",
+  "differentiator": "A quick-reference timing table up front, then real checklists per stage — built to actually run a client through, not just describe a process in theory.",
+  "description": "The exact steps to take a new client from a signed contract to a delivered project: kickoff call, data collection, work stages, check-ins, and offboarding — each with its own checklist.",
+  "whatsInside": [
+    "Quick-reference stage & timing table",
+    "Stage 1: Contract Signed",
+    "Stage 2: Kickoff Call",
+    "Stage 3: Data Collection & Access",
+    "Stage 4: Work Begins",
+    "Stage 5: Ongoing Check-Ins",
+    "Stage 6: Delivery & Offboarding"
+  ],
+  "whoFor": "Agencies and freelancers who want every new client to feel like the tenth time you've done this, not the first.",
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-onboarding",
+  "cardStyle": "paper",
+  "heroTag": "6 STAGES",
+  "featured": false,
+  "order": 6
+}

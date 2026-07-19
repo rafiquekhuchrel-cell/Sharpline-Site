@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Terms & Conditions">
+  <section class="section-dark legal-hero">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">LEGAL</p>
+      <h1>Terms &amp; Conditions</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-body">
+      <p>By purchasing a product from Sharpline, you agree to the following:</p>
+
+      <h2>License</h2>
+      <p>Every template you purchase is licensed for your own personal or client-facing business use — unlimited projects, unlimited edits, for as long as you like. You may not resell, redistribute, sub-license, or share the source files (including on other marketplaces, file-sharing sites, or with anyone outside your own business) as-is or repackaged. If you're an agency or freelancer, you may use these templates in deliverables you create for your clients, but you may not hand over the original editable Sharpline files as a standalone product.</p>
+
+      <h2>Ownership</h2>
+      <p>Sharpline retains ownership of the original template designs and structure. Your purchase grants a license to use, not a transfer of copyright.</p>
+
+      <h2>Delivery</h2>
+      <p>All products are delivered digitally and instantly after checkout via Payhip. You are responsible for providing a valid email address and downloading your files promptly.</p>
+
+      <h2>Changes to Products</h2>
+      <p>Sharpline may update or improve templates over time. Past purchases are not guaranteed future free updates unless stated on the product page at time of purchase.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about licensing or usage — reach out via <a href="mailto:hello@sharpline.store">hello@sharpline.store</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero { position: relative; padding: 56px 0; }
+  .legal-hero .container { position: relative; z-index: 2; }
+  .legal-hero h1 { color: var(--white); font-size: 34px; margin-top: 10px; }
+  .legal-body { max-width: 680px; }
+  .legal-body h2 { font-size: 20px; margin-top: 34px; margin-bottom: 12px; }
+  .legal-body p { color: var(--text); font-size: 16px; line-height: 1.7; }
+  .legal-body a { color: var(--emerald-dark); font-weight: 600; }
+</style>

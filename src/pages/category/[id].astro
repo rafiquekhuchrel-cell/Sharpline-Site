@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+
+export async function getStaticPaths() {
+  const categories = await getCollection('categories');
+  return categories.map((cat) => ({
+    params: { id: cat.id },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const products = (await getCollection('products'))
+  .filter((p) => p.data.category === category.id)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title={category.data.name} description={category.data.description}>
+  <section class="cat-hero section-dark">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">SHOP BY SOLUTION</p>
+      <h1>{category.data.name}</h1>
+      <p class="cat-tagline">{category.data.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="product-grid">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cat-hero { position: relative; padding: 64px 0; }
+  .cat-hero .container { position: relative; z-index: 2; }
+  .cat-hero h1 { color: var(--white); font-size: 40px; margin-top: 12px; }
+  .cat-tagline { color: #B9C4C8; font-size: 18px; margin-top: 16px; max-width: 560px; }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 860px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+</style>

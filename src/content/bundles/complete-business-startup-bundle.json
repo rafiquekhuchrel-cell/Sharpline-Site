@@ -1,0 +1,17 @@
+{
+  "name": "Complete Business Startup Bundle",
+  "tagline": "One purchase. A complete system.",
+  "price": 39,
+  "description": "Everything you need to plan, pitch, price, and run your business — seven working documents, not seven static mockups. Choose this when you want the full framework instead of building it piece by piece.",
+  "productSlugs": [
+    "real-forecast-model",
+    "seo-proposal-template",
+    "one-page-business-plan",
+    "company-profile-template",
+    "operations-manual",
+    "client-onboarding-workflow",
+    "startup-launch-checklist"
+  ],
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-bundle",
+  "featured": true
+}

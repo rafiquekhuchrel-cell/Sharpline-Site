@@ -1,0 +1,23 @@
+{
+  "name": "Startup Launch Checklist",
+  "tagline": "The step-by-step sequence, not just a list of vague advice.",
+  "price": null,
+  "format": "Word (.docx) — 1 page",
+  "formatTag": "FREE",
+  "category": "business-plans-finance",
+  "differentiator": "Sequenced in the actual order operations happen, not a random brain-dump of 47 generic bullet points.",
+  "description": "Everything to do before you take your first client or sale — pre-launch foundation, pricing & positioning, first-client readiness, launch marketing basics, and a 30-day follow-up, all in order.",
+  "whatsInside": [
+    "Pre-Launch Foundation",
+    "Pricing & Positioning",
+    "First-Client Readiness",
+    "Launch Marketing Basics",
+    "30-Day Follow-Up"
+  ],
+  "whoFor": "First-time founders and freelancers who want a sequence to follow instead of another motivational listicle.",
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-checklist",
+  "cardStyle": "paper",
+  "heroTag": "FREE DOWNLOAD",
+  "featured": false,
+  "order": 7
+}

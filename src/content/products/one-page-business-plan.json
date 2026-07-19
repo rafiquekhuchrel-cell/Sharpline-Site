@@ -1,0 +1,23 @@
+{
+  "name": "One-Page Business Plan",
+  "tagline": "Problem to financials, on one page — no 40-page document nobody reads.",
+  "price": 9,
+  "format": "Word (.docx) — 1 page",
+  "formatTag": "1 PAGE",
+  "category": "business-plans-finance",
+  "differentiator": "Lean-canvas structure means you can actually finish it in an afternoon, and anyone you hand it to can read it in two minutes.",
+  "description": "A lean, one-page business plan covering problem, solution, target market, revenue model, competitive advantage, financial snapshot, and milestones — structured as a grid, not a document you'll abandon halfway through.",
+  "whatsInside": [
+    "Problem / Solution / Target Market grid",
+    "Revenue Model & Competitive Advantage",
+    "Marketing Channels",
+    "Financial Snapshot & Key Milestones",
+    "Team & Ask section"
+  ],
+  "whoFor": "First-time founders who want a plan they'll actually finish and actually use — not a document that exists to look thorough.",
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-oneplanner",
+  "cardStyle": "paper",
+  "heroTag": "ONE PAGE",
+  "featured": false,
+  "order": 3
+}

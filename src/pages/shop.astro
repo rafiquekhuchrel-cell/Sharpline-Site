@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Shop All Templates" description="Every Sharpline template in one place.">
+  <section class="shop-hero section-dark">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">SHOP ALL</p>
+      <h1>Every template, one place.</h1>
+      <p class="shop-tagline">Company profiles, proposals, business plans, financial forecasts, and operations systems — all in one shop.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="product-grid">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .shop-hero { position: relative; padding: 64px 0; }
+  .shop-hero .container { position: relative; z-index: 2; }
+  .shop-hero h1 { color: var(--white); font-size: 42px; margin-top: 12px; }
+  .shop-tagline { color: #B9C4C8; font-size: 18px; margin-top: 16px; max-width: 560px; }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 860px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+</style>

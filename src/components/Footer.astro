@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="logo-word">SHARP<span class="accent">LINE</span></span>
+      <p>Premium templates for founders who move with intent.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="/shop">Shop All</a>
+      {categories.map((cat) => (
+        <a href={`/category/${cat.id}`}>{cat.data.name}</a>
+      ))}
+      <a href="/bundle/complete-business-startup-bundle">Startup Bundle</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Store</h4>
+      <a href="/product/startup-launch-checklist">Free Checklist</a>
+      <a href="/about">About</a>
+      <a href="/faq">FAQ</a>
+      <a href="mailto:hello@sharpline.store">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/terms">Terms &amp; Conditions</a>
+      <a href="/refund-policy">Refund Policy</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>&copy; {year} Sharpline. All rights reserved.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: #B9C4C8;
+    padding-top: 64px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .footer-brand .logo-word {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--white);
+  }
+  .footer-brand .accent { color: var(--emerald); }
+  .footer-brand p {
+    margin-top: 12px;
+    font-size: 14px;
+    max-width: 240px;
+    color: #8CA0A8;
+  }
+  .footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 14.5px;
+    color: #B9C4C8;
+    padding: 6px 0;
+  }
+  .footer-col a:hover { color: var(--emerald-light); }
+
+  .footer-bottom {
+    padding: 24px 32px;
+    font-size: 13px;
+    color: #6E838C;
+  }
+
+  @media (max-width: 860px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  { q: 'What formats do I get?', a: "Depending on the product, you'll receive PDF, Word, or Excel files." },
+  { q: 'Can I customize the templates?', a: 'Yes. Every product is built to be flexible and easy to adapt — bracketed placeholders show you exactly what to edit.' },
+  { q: 'Are these print-ready?', a: 'The document-based templates are designed for both digital use and printing. The Excel forecast model is built for on-screen use.' },
+  { q: 'How do I receive my files?', a: 'Files are delivered instantly after checkout through Payhip.' },
+  { q: 'Can I use these for client work?', a: "Yes — every template is licensed for unlimited personal or client-facing business use. See the Terms & Conditions for the full licensing details." },
+];
+---
+<BaseLayout title="FAQ" description="Answers to common questions about Sharpline templates.">
+  <section class="section-dark faq-hero">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">FAQ</p>
+      <h1>Common questions</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item">
+          <h3>{f.q}</h3>
+          <p>{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-hero { position: relative; padding: 64px 0; }
+  .faq-hero .container { position: relative; z-index: 2; }
+  .faq-hero h1 { color: var(--white); font-size: 40px; margin-top: 12px; }
+
+  .faq-list { max-width: 700px; }
+  .faq-item { padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .faq-item h3 { font-size: 19px; }
+  .faq-item p { color: var(--slate); font-size: 16px; margin-top: 10px; line-height: 1.6; }
+</style>

@@ -1,0 +1,24 @@
+{
+  "name": "Operations Manual Template",
+  "tagline": "How your business runs, documented once — so it doesn't live only in your head.",
+  "price": 12,
+  "format": "Word (.docx) — 4 pages",
+  "formatTag": "4 PAGES",
+  "category": "operations-client-systems",
+  "differentiator": "Includes a real SOP section and emergency contacts table, not just a generic \"processes\" placeholder — built to actually hand to someone you hire.",
+  "description": "Document your roles, tools & access, recurring checklists, communication protocol, SOPs, and emergency contacts in one place — the manual that lets you delegate without re-explaining everything from scratch.",
+  "whatsInside": [
+    "Roles & responsibilities table",
+    "Tools & access log",
+    "Daily / weekly operating checklist",
+    "Client communication protocol",
+    "Standard Operating Procedures section",
+    "Emergency contacts & escalation table"
+  ],
+  "whoFor": "Solo operators about to hire their first contractor or employee, and don't want to be the single point of failure.",
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-opsmanual",
+  "cardStyle": "paper",
+  "heroTag": "DELEGATION-READY",
+  "featured": false,
+  "order": 5
+}

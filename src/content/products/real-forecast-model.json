@@ -1,0 +1,24 @@
+{
+  "name": "The Real Forecast Model",
+  "tagline": "Not a template that looks like a forecast. A model that actually does the math.",
+  "price": 19,
+  "format": "Excel (.xlsx) — works in Excel or Google Sheets",
+  "formatTag": "LIVE FORMULAS",
+  "category": "business-plans-finance",
+  "differentiator": "Every number is a real formula, linked three sheets deep. Change one assumption and the entire 3-year forecast recalculates — correctly, to the penny.",
+  "description": "A fully linked 3-year financial model built the way real forecasts are built — revenue assumptions flow into your P&L, your P&L flows into cash flow, cash flow flows into a balance sheet that actually balances to $0 every year. No macros, no lock-outs, fully editable.",
+  "whatsInside": [
+    "Assumptions tab — every input in one place, color-coded",
+    "P&L — monthly Year 1, annual Year 2 & 3",
+    "Cash Flow — know exactly when you'll be tight on cash",
+    "Balance Sheet — balances to $0, every year",
+    "Break-Even Analysis — exact revenue and month",
+    "Investor Summary — one printable page, auto-populated"
+  ],
+  "whoFor": "Founders applying for a loan, pitching investors, or tired of guessing whether their business math actually works.",
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-forecast",
+  "cardStyle": "dark",
+  "heroTag": "BALANCES TO $0",
+  "featured": true,
+  "order": 1
+}

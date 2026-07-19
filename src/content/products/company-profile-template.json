@@ -1,0 +1,23 @@
+{
+  "name": "Company Profile Template",
+  "tagline": "About, Services, Portfolio, and Why Us — ready to send to a client or partner today.",
+  "price": 9,
+  "format": "Word (.docx) — 3 pages",
+  "formatTag": "3 PAGES",
+  "category": "company-profiles-proposals",
+  "differentiator": "Structured around a real Portfolio & Case Examples table, not just an \"About Us\" paragraph — built to prove your work, not just describe it.",
+  "description": "A professional company profile covering About Us, Services, Portfolio & Case Examples, Why Choose Us, and Contact — the document you hand a prospective client or partner before the first real conversation.",
+  "whatsInside": [
+    "Cover page with company snapshot",
+    "About Us + At a Glance facts table",
+    "Services breakdown",
+    "Portfolio & Case Examples table",
+    "Why Choose Us + Contact"
+  ],
+  "whoFor": "Freelancers and small agencies who need to look established before they technically are.",
+  "checkoutUrl": "https://payhip.com/b/PLACEHOLDER-profile",
+  "cardStyle": "paper",
+  "heroTag": "EDITABLE",
+  "featured": true,
+  "order": 4
+}

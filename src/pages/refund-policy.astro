@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Refund Policy">
+  <section class="section-dark legal-hero">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">LEGAL</p>
+      <h1>Refund Policy</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-body">
+      <p>Because every product is an instant-download digital file, all sales are final once a download link has been issued — we're not able to offer refunds simply due to change of mind.</p>
+      <p>That said, if something is genuinely wrong on our end, we'll make it right:</p>
+
+      <h2>Corrupted or Broken File</h2>
+      <p>Contact us within 7 days with the issue and we'll fix or replace it, no questions asked.</p>
+
+      <h2>Product Significantly Not as Described</h2>
+      <p>Contact us within 7 days; we'll review and offer a fix or refund at our discretion.</p>
+
+      <h2>Accidental Duplicate Purchase</h2>
+      <p>Contact us and we'll refund the duplicate.</p>
+
+      <h2>How to Request Support</h2>
+      <p>Email <a href="mailto:hello@sharpline.store">hello@sharpline.store</a> with your order number and a description of the issue. We aim to respond within 2 business days.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero { position: relative; padding: 56px 0; }
+  .legal-hero .container { position: relative; z-index: 2; }
+  .legal-hero h1 { color: var(--white); font-size: 34px; margin-top: 10px; }
+  .legal-body { max-width: 680px; }
+  .legal-body h2 { font-size: 20px; margin-top: 34px; margin-bottom: 12px; }
+  .legal-body p { color: var(--text); font-size: 16px; line-height: 1.7; }
+  .legal-body a { color: var(--emerald-dark); font-weight: 600; }
+</style>

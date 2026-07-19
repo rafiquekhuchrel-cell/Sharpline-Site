@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
+const products = await getCollection('products');
+const featured = products.filter((p) => p.data.featured).sort((a, b) => a.data.order - b.data.order);
+const bundle = (await getCollection('bundles'))[0];
+const checklist = products.find((p) => p.id === 'startup-launch-checklist');
+---
+<BaseLayout title="Premium Digital Templates for Founders">
+  <Hero />
+
+  <!-- Intro -->
+  <section class="section intro">
+    <div class="container intro-inner">
+      <h2>Built for serious operators.</h2>
+      <p>This is where entrepreneurs, freelancers, and small business owners come to find clean, strategic, ready-to-use digital products that save time and elevate how they work.</p>
+    </div>
+  </section>
+
+  <!-- Shop by Solution -->
+  <section class="section" id="solutions">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">SHOP BY SOLUTION</p>
+        <h2>Find the system you're missing</h2>
+      </div>
+      <div class="category-grid">
+        {categories.map((cat) => (
+          <a href={`/category/${cat.id}`} class="category-card">
+            <h3>{cat.data.name}</h3>
+            <p>{cat.data.tagline}</p>
+            <span class="cat-link">Browse &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Where to Start -->
+  <section class="section section-alt" id="where-to-start">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">WHERE TO START</p>
+        <h2>The fastest route to something useful</h2>
+        <p>New here? Start with the products that give you the most immediate credibility boost — a real financial model and a client-ready proposal, both built to be used the day you download them.</p>
+      </div>
+      <div class="product-grid">
+        {featured.map((product) => <ProductCard product={product} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bundle -->
+  {bundle && (
+    <section class="section section-dark">
+      <div class="grid-bg"></div>
+      <div class="container bundle-inner">
+        <div>
+          <p class="eyebrow on-dark">FEATURED BUNDLE</p>
+          <h2>One purchase. A complete system.</h2>
+          <p class="bundle-desc">{bundle.data.description}</p>
+          <a href={`/bundle/${bundle.id}`} class="btn btn-primary">See What's Inside &mdash; ${bundle.data.price}</a>
+        </div>
+        <div class="bundle-count">
+          <span class="bundle-num">{bundle.data.productSlugs.length}</span>
+          <span class="bundle-label">documents<br/>in one system</span>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Why Buy Here -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">WHY BUY HERE</p>
+        <h2>Why this store stands apart</h2>
+      </div>
+      <ul class="why-grid">
+        <li>Clean, premium design.</li>
+        <li>Practical, business-first structure.</li>
+        <li>Easy to edit and adapt.</li>
+        <li>Built to save time, not create more work.</li>
+        <li>Made for real use, not just decoration.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Freebie -->
+  {checklist && (
+    <section class="section section-alt">
+      <div class="container freebie-inner">
+        <div>
+          <p class="eyebrow">PREVIEW THE QUALITY</p>
+          <h2>Download a free sample and see exactly how these templates are built before you commit.</h2>
+        </div>
+        <a href={`/product/${checklist.id}`} class="btn btn-primary">Get the Free Checklist</a>
+      </div>
+    </section>
+  )}
+
+  <!-- About teaser -->
+  <section class="section">
+    <div class="container about-inner">
+      <p class="eyebrow">ABOUT</p>
+      <h2>Made for people who take their business seriously.</h2>
+      <p>I create digital products for founders, freelancers, and service businesses that want tools with structure, clarity, and commercial value. Every product is designed to help you operate with more confidence and less friction.</p>
+      <a href="/about" class="btn btn-secondary-light">More About Sharpline</a>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section section-dark final-cta">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <h2>Ready to upgrade the way you work?</h2>
+      <p>Choose your template, download instantly, and start with tools that feel as sharp as your ambition.</p>
+      <a href="/shop" class="btn btn-primary">Shop All Templates</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro-inner { max-width: 640px; text-align: center; margin: 0 auto; }
+  .intro-inner p { color: var(--slate); font-size: 18px; margin-top: 16px; line-height: 1.6; }
+
+  .section-alt { background: var(--paper2); }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .category-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .category-card:hover { border-color: var(--emerald); transform: translateY(-3px); }
+  .category-card h3 { font-size: 20px; }
+  .category-card p { color: var(--slate); font-size: 14.5px; margin-top: 10px; }
+  .cat-link { display: inline-block; margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--emerald-dark); }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .bundle-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .bundle-desc { color: #B9C4C8; font-size: 17px; margin: 18px 0 30px; max-width: 520px; line-height: 1.6; }
+  .bundle-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+  }
+  .bundle-num { font-family: var(--font-mono); font-size: 56px; font-weight: bold; color: var(--emerald); }
+  .bundle-label { color: #B9C4C8; font-size: 14px; margin-top: 8px; }
+
+  .why-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .why-grid li {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    font-weight: 600;
+    font-size: 15.5px;
+    position: relative;
+    padding-left: 44px;
+  }
+  .why-grid li::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 24px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--emerald);
+  }
+
+  .freebie-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .freebie-inner h2 { font-size: 28px; max-width: 560px; margin-top: 10px; }
+
+  .about-inner { max-width: 640px; }
+  .about-inner h2 { font-size: 32px; margin-top: 12px; }
+  .about-inner p { color: var(--slate); font-size: 17px; margin: 18px 0 28px; line-height: 1.6; }
+
+  .final-cta { position: relative; text-align: center; }
+  .final-cta .container { position: relative; z-index: 2; }
+  .final-cta h2 { color: var(--white); font-size: 36px; }
+  .final-cta p { color: #B9C4C8; font-size: 17px; margin: 16px 0 32px; }
+
+  @media (max-width: 860px) {
+    .category-grid, .product-grid, .why-grid { grid-template-columns: 1fr; }
+    .bundle-inner { grid-template-columns: 1fr; }
+    .freebie-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>

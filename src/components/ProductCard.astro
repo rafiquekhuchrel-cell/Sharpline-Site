@@ -1,0 +1,85 @@
+---
+interface Props { product: any; }
+const { product } = Astro.props;
+const { name, tagline, price, formatTag, heroTag } = product.data;
+---
+<a href={`/product/${product.id}`} class="pcard">
+  <div class="pcard-top">
+    <span class="pcard-tag">{formatTag}</span>
+    <span class="pcard-hero-tag">{heroTag}</span>
+  </div>
+  <h3>{name}</h3>
+  <p>{tagline}</p>
+  <div class="pcard-foot">
+    <span class="pcard-price">{price === null ? 'Free' : `$${price}`}</span>
+    <span class="pcard-cta">View &rarr;</span>
+  </div>
+</a>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .pcard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(11,31,43,0.10);
+    border-color: var(--emerald);
+  }
+  .pcard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pcard-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--emerald-dark);
+  }
+  .pcard-hero-tag {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: bold;
+    background: var(--amber);
+    color: #3A2A05;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .pcard h3 {
+    font-size: 19px;
+    margin-top: 16px;
+  }
+  .pcard p {
+    color: var(--slate);
+    font-size: 14.5px;
+    margin-top: 10px;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  .pcard-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .pcard-price {
+    font-family: var(--font-mono);
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .pcard-cta {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--emerald-dark);
+  }
+</style>
