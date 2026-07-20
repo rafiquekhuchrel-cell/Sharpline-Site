@@ -15,9 +15,26 @@ const currentPath = Astro.url.pathname;
 
     <nav class="main-nav" aria-label="Main">
       <a href="/shop" class:list={[currentPath === '/shop' && 'active']}>Shop All</a>
-      {categories.map((cat) => (
-        <a href={`/category/${cat.id}`} class:list={[currentPath === `/category/${cat.id}` && 'active']}>{cat.data.name}</a>
-      ))}
+
+      <div class="nav-dropdown">
+        <a
+          href="/shop"
+          class:list={['nav-dropdown-trigger', currentPath.startsWith('/category/') && 'active']}
+        >
+          Templates
+          <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          {categories.map((cat) => (
+            <a href={`/category/${cat.id}`} class:list={[currentPath === `/category/${cat.id}` && 'active']}>
+              {cat.data.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
       <a href="/bundle/complete-business-startup-bundle" class:list={[currentPath.startsWith('/bundle') && 'active']}>Startup Bundle</a>
       <a href="/blog" class:list={[currentPath.startsWith('/blog') && 'active']}>Blog</a>
       <a href="/about" class:list={[currentPath === '/about' && 'active']}>About</a>
@@ -79,6 +96,64 @@ const currentPath = Astro.url.pathname;
     border-bottom-color: var(--emerald);
     color: var(--emerald-dark);
     font-weight: 600;
+  }
+
+  .nav-dropdown {
+    position: relative;
+  }
+  .nav-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .chevron {
+    transition: transform 0.15s ease;
+    position: relative;
+    top: 1px;
+  }
+  .nav-dropdown:hover .chevron,
+  .nav-dropdown:focus-within .chevron {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 16px 34px rgba(11,31,43,0.14);
+    padding: 8px;
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-6px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+    z-index: 10;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav-dropdown-menu a {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border-bottom: none !important;
+    white-space: nowrap;
+  }
+  .nav-dropdown-menu a:hover {
+    background: var(--paper2);
+  }
+  .nav-dropdown-menu a.active {
+    background: var(--paper2);
+    color: var(--emerald-dark);
   }
 
   .header-cta { padding: 10px 20px; font-size: 14px; flex-shrink: 0; }
